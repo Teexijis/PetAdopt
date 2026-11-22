@@ -1,0 +1,28 @@
+services:
+  account-db:
+    image: postgres:17
+    container_name: petadopt-account-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${ACCOUNT_DB_USER}
+      POSTGRES_PASSWORD: ${ACCOUNT_DB_PASSWORD}
+      POSTGRES_DB: accounts
+    ports:
+      - "5432:5432"
+    volumes:
+      - account_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${ACCOUNT_DB_USER} -d accounts"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+    networks:
+      - petadopt-net
+
+volumes:
+  account_data:
+
+networks:
+  petadopt-net:
+    name: petadopt-net
+    driver: bridge
