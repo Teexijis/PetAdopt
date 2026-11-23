@@ -2,12 +2,13 @@ package main
 
 import (
     "fmt"
+	"os"
     "github.com/Teexijis/PetAdopt/account/config"
     "github.com/Teexijis/PetAdopt/account/internal/bootstrap"
 )
 
 func main() {
-    cfg, err := config.LoadConfig("config.yaml")
+    cfg, err := config.LoadConfig(os.Getenv("configPath"))
     if err != nil {
         panic(fmt.Sprintf("ошибка парсинга конфига: %v", err))
     }
