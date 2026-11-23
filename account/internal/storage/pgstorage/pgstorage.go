@@ -11,16 +11,6 @@ type PGstorage struct {
     db *pgxpool.Pool
 }
 
-const (
-    tableName = "users"
-    IDColumnName           = "id"
-    FullNameColumnName     = "full_name"
-    EmailColumnName        = "email"
-    PhoneColumnName        = "phone"
-    PasswordHashColumnName = "password_hash"
-    RoleColumnName         = "role"
-)
-
 func NewPGStorage(connString string) (*PGstorage, error) {
     config, err := pgxpool.ParseConfig(connString)
     if err != nil {
