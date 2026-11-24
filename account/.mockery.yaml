@@ -1,0 +1,10 @@
+template: testify
+packages:
+    github.com/Teexijis/PetAdopt/account/internal/services/accountService:
+        config:
+            dir: "{{.InterfaceDir}}/mocks"
+            filename: "mocks.go"
+            pkgname: "mocks"
+            structname: "{{.InterfaceName}}"
+        interfaces:
+            UserStorage:
