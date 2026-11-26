@@ -15,4 +15,7 @@ func main() {
 
     accountStorage := bootstrap.InitPGStorage(cfg)
     defer accountStorage.Close()
+	accountService := bootstrap.InitAccountService(accountStorage, cfg)
+    accountAPI := bootstrap.InitAccountServiceAPI(accountService, cfg)
+    bootstrap.AppRun(*accountAPI)
 }

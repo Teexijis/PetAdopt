@@ -1,0 +1,78 @@
+syntax = "proto3";
+package account.service.v1;
+option go_package = "github.com/Teexijis/PetAdopt/account/internal/pb/account_api";
+
+import "google/api/annotations.proto";
+
+service AccountService {
+    rpc Register(RegisterRequest) returns (RegisterResponse) {
+        option (google.api.http) = {
+            post: "/auth/register"
+            body: "*"
+        };
+    }
+
+    rpc Login(LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/auth/login"
+            body: "*"
+        };
+    }
+
+
+    rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {
+        option (google.api.http) = {
+            get: "/users/me"
+        };
+    }
+
+    rpc GetUserProfile(GetUserProfileRequest) returns (GetUserProfileResponse);
+    rpc GetAdminIds(GetAdminIdsRequest) returns (GetAdminIdsResponse);
+}
+
+message RegisterRequest {
+    string full_name = 1;
+    string email = 2;
+    string password = 3;
+    optional string phone = 4;
+}
+
+message RegisterResponse {
+    int64 user_id = 1;
+}
+
+message LoginRequest {
+    string email = 1;
+    string password = 2;
+}
+
+message LoginResponse {
+    string access_token = 1;
+}
+
+message GetProfileRequest {}
+
+message GetProfileResponse {
+    int64 id = 1;
+    string full_name = 2;
+    string email = 3;
+    optional string phone = 4;
+    string role = 5;
+}
+
+message GetUserProfileRequest {
+    int64 user_id = 1;
+}
+
+// когда администратор просматривает карточку для заявки
+message GetUserProfileResponse {
+    string full_name = 1;
+    string email = 2;
+    optional string phone = 3;
+}
+
+message GetAdminIdsRequest {}
+
+message GetAdminIdsResponse {
+    repeated int64 admin_ids = 1;
+}

@@ -10,7 +10,8 @@
             "cwd": "${workspaceFolder}/account",
             "envFile": "${workspaceFolder}/.env",
             "env": {
-                "configPath": "${workspaceFolder}/account/config.yaml"
+                "configPath": "${workspaceFolder}/account/config.yaml",
+                "swaggerPath": "${workspaceFolder}/account/internal/pb/swagger/account_api/account.swagger.json"
             }
         }
 
